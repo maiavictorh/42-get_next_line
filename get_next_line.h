@@ -6,7 +6,7 @@
 /*   By: victode- <victode-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:38:53 by victode-          #+#    #+#             */
-/*   Updated: 2025/11/11 15:28:11 by victode-         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:20:30 by victode-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+# define BUFFER_SIZE 1024
+
+/* ========== Main ========== */
+
 char	*get_next_line(int fd);
+
+/* ========== Utils ========== */
+
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif
