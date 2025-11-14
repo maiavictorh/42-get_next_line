@@ -6,7 +6,7 @@
 /*   By: victode- <victode-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:44:05 by victode-          #+#    #+#             */
-/*   Updated: 2025/11/14 00:17:47 by victode-         ###   ########.fr       */
+/*   Updated: 2025/11/14 17:17:53 by victode-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,32 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	size_t	s_len;
+	char	*sub;
+
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	if (len > s_len - start)
+		len = s_len - start;
+	sub = malloc(len + 1);
+	if (!sub)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		sub[i] = s[start + i];
+		i++;
+	}
+	sub[i] = '\0';
+	return (sub);
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	i;
@@ -63,7 +89,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (ft_strdup(s2));
 	i = 0;
 	j = 0;
-	join = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	join = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!join)
 		return (NULL);
 	while (s1[j])
@@ -74,8 +100,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	join[i] = '\0';
 	return (join);
 }
-
-/* int	main(void)
+/*
+int	main(void)
 {
 	char *s1 = NULL;
 	char *s2 = "Hello";
@@ -83,4 +109,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	printf("%s\n", join);
 	free(join);
 }
- */
+*/
