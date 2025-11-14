@@ -1,14 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: victode- <victode-@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/13 23:24:16 by victode-          #+#    #+#             */
+/*   Updated: 2025/11/13 23:24:59 by victode-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-int main()
+int	main(void)
 {
-    int fd;
-	char buffer[1024];
+	int		fd1;
+	int		fd2;
+	char	*str;
 
-    fd = open("test.txt", O_RDONLY);
-	if (fd == -1)
-		return (write (1, "Cannot read file!\n", 19));
-	printf("Fd return: %d\n", fd);
-	while (read(fd, buffer, sizeof(buffer)));
-		write (1, fd, buffer, sizeof(buffer));
+	fd1 = open("test/test.txt", O_RDONLY);
+	fd2 = open("test/longline.txt", O_RDONLY);
+	str = get_next_line(fd1);
+	printf("\n%s\n", str);
+	free(str);
+	str = get_next_line(fd1);
+	printf("\n%s\n", str);
+	free(str);
+	str = get_next_line(fd1);
+	printf("\n-%s-\n", str);
+	free(str);
+	str = get_next_line(fd1);
+	printf("\n-%s-\n", str);
+	free(str);
+	close(fd1);
+	close(fd2);
 }

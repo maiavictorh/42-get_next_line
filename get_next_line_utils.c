@@ -6,7 +6,7 @@
 /*   By: victode- <victode-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:44:05 by victode-          #+#    #+#             */
-/*   Updated: 2025/11/13 18:24:21 by victode-         ###   ########.fr       */
+/*   Updated: 2025/11/14 00:17:47 by victode-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	j;
 	char	*join;
 
+	if (!s1)
+		return (ft_strdup(s2));
 	i = 0;
 	j = 0;
 	join = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
@@ -72,3 +74,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	join[i] = '\0';
 	return (join);
 }
+
+/* int	main(void)
+{
+	char *s1 = NULL;
+	char *s2 = "Hello";
+	char *join = ft_strjoin(s1, s2);
+	printf("%s\n", join);
+	free(join);
+}
+ */
