@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: victode- <victode-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/08 18:38:53 by victode-          #+#    #+#             */
-/*   Updated: 2025/11/14 15:56:56 by victode-         ###   ########.fr       */
+/*   Created: 2025/11/15 19:55:52 by victode-          #+#    #+#             */
+/*   Updated: 2025/11/15 19:55:56 by victode-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
-
-# define BUFFER_SIZE 1024
 
 /* ========== Main ========== */
 

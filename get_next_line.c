@@ -6,7 +6,7 @@
 /*   By: victode- <victode-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:38:47 by victode-          #+#    #+#             */
-/*   Updated: 2025/11/15 17:10:08 by victode-         ###   ########.fr       */
+/*   Updated: 2025/11/16 20:07:20 by victode-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*extract_line(char *remain)
 	return (line);
 }
 
-char	*clean_remain(char *remain)
+static char	*clean_remain(char *remain)
 {
 	size_t	i;
 	char	*new;
@@ -34,7 +34,7 @@ char	*clean_remain(char *remain)
 	i = 0;
 	while (remain[i] && remain[i] != '\n')
 		i++;
-	if (remain[i + 1] == '\0')
+	if (remain[i] == '\0')
 		return (NULL);
 	new = ft_substr(remain, i + 1, ft_strlen(remain));
 	return (new);
@@ -63,17 +63,7 @@ char	*get_next_line(int fd)
 		if (ft_strchr(remain, '\n'))
 			break ;
 	}
-	printf("Remain:\n%s", remain);
 	line = extract_line(remain);
+	remain = clean_remain(remain);
 	return (line);
 }
-/*
-int	main(void)
-{
-	int fd = open("test.txt", O_RDONLY);
-	char *res = get_next_line(fd);
-	printf("%s", res);
-	free(res);
-	close(fd);
-}
-*/

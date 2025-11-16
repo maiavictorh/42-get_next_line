@@ -1,5 +1,0 @@
-Hello World!
-
-get_next_line test
-
-last line with no newline
