@@ -6,7 +6,7 @@
 /*   By: victode- <victode-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:38:47 by victode-          #+#    #+#             */
-/*   Updated: 2025/11/18 18:00:22 by victode-         ###   ########.fr       */
+/*   Updated: 2025/11/19 00:13:41 by victode-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ static char	*clean_stack(char *stack)
 		return (NULL);
 	while (stack[i] && stack[i] != '\n')
 		i++;
-	if (stack[i] == '\0')
-	{
-		free(stack);
-		return (NULL);
-	}
 	new = ft_substr(stack, i + 1, ft_strlen(stack));
 	free(stack);
 	return (new);
@@ -64,18 +59,24 @@ char	*get_next_line(int fd)
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read == -1)
 		{
-			free(buff);
 			free(stack);
-			return (NULL);
+			stack = NULL;
+			return (free(buff), NULL);
 		}
-		else if (!bytes_read)
-			return (NULL);
 		buff[bytes_read] = '\0';
 		stack = ft_strjoin(stack, buff);
 		if (ft_strchr(stack, '\n'))
 			break ;
 	}
 	free(buff);
+	if (!stack)
+		return (NULL);
+	if (stack[0] == '\0')
+	{
+		free(stack);
+		stack = NULL;
+		return (NULL);
+	}
 	line = extract_line(stack);
 	stack = clean_stack(stack);
 	return (line);
