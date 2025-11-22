@@ -6,7 +6,7 @@
 /*   By: victode- <victode-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:55:52 by victode-          #+#    #+#             */
-/*   Updated: 2025/11/18 17:05:23 by victode-         ###   ########.fr       */
+/*   Updated: 2025/11/22 15:29:12 by victode-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ char	*get_next_line(int fd);
 
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
+char	*extract_line(char *stack);
+char	*clean_stack(char *stack);
 
 #endif
