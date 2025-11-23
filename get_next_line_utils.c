@@ -6,7 +6,7 @@
 /*   By: victode- <victode-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:44:05 by victode-          #+#    #+#             */
-/*   Updated: 2025/11/22 15:29:20 by victode-         ###   ########.fr       */
+/*   Updated: 2025/11/23 03:39:25 by victode-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_custom_strjoin(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -52,7 +52,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	if (!s2)
 		return (free(s1), NULL);
-		join = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	join = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!join)
 		return (free(s1), NULL);
 	i = -1;
@@ -69,28 +69,49 @@ char	*ft_strjoin(char *s1, char *s2)
 char	*extract_line(char *stack)
 {
 	size_t	i;
+	size_t	len;
 	char	*line;
 
 	if (!stack)
 		return (NULL);
 	i = 0;
-	while (stack[i] && stack[i] != '\n')
+	len = 0;
+	while (stack[len] && stack[len] != '\n')
+		len++;
+	if (stack[len] == '\n')
+		len++;
+	line = malloc(len + 1);
+	if (!line)
+		return (free(stack), NULL);
+	while (i < len)
+	{
+		line[i] = stack[i];
 		i++;
-	line = ft_substr(stack, 0, i + 1);
+	}
+	line[i] = '\0';
 	return (line);
 }
 
 char	*clean_stack(char *stack)
 {
 	size_t	i;
+	size_t	len;
 	char	*new;
 
-	i = 0;
 	if (!stack)
 		return (NULL);
-	while (stack[i] && stack[i] != '\n')
-		i++;
-	new = ft_substr(stack, i + 1, ft_strlen(stack));
+	i = 0;
+	len = 0;
+	while (stack[len] && stack[len] != '\n')
+		len++;
+	if (stack[len] == '\n')
+		len++;
+	new = malloc(ft_strlen(stack) - len);
+	if (!new)
+		return (free(stack), NULL);
+	while (len < ft_strlen(stack))
+		new[i++] = stack[len++];
+	new[i] = '\0';
 	free(stack);
 	return (new);
 }

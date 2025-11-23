@@ -1,0 +1,5 @@
+get_next_line
+
+test
+
+no newline
