@@ -6,7 +6,7 @@
 /*   By: victode- <victode-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:38:47 by victode-          #+#    #+#             */
-/*   Updated: 2025/11/23 03:34:52 by victode-         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:19:01 by victode-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 char	*get_next_line(int fd)
 {
 	int			bytes_read;
-	static char	*stack;
-	char		buff[BUFFER_SIZE + 1];
+	static char	buffer[BUFFER_SIZE + 1];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -24,44 +23,32 @@ char	*get_next_line(int fd)
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
-		bytes_read = read(fd, buff, BUFFER_SIZE);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-			return (free(stack), stack = NULL, NULL);
+			return (free(buffer), buffer = NULL, NULL);
 		buff[bytes_read] = '\0';
-		stack = ft_custom_strjoin(stack, buff);
-		if (ft_strchr(stack, '\n'))
+		buffer = ft_custom_strjoin(buffer, buffer);
+		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
-	if (!stack || stack[0] == '\0')
-		return (free(stack), stack = NULL, NULL);
-	line = extract_line(stack);
-	stack = clean_stack(stack);
+	if (!buffer || buffer[0] == '\0')
+		return (free(buffer), buffer = NULL, NULL);
+	line = extract_line(buffer);
+	buffer = clean_buffer(buffer);
 	return (line);
 }
-/* 
-int	main(void)
+/*
+int main(void)
 {
-	int		fd1;
-	int		fd2;
-	char	*s1;
-	// char 	*s2;
-
-	fd1 = open("test.txt", O_RDONLY);
-	fd2 = open("longline.txt", O_RDONLY);
-
-	for (int i = 0; i < 5; i++)
-	{
-		s1 = get_next_line(fd1);
-		printf("%s", s1);
-		free(s1);
-	}
-	// printf("\nTest 2:\n");
-	// s2 = get_next_line(fd2);
-	// printf("%s", s2);
-	// free(s2);
-
-	printf("\n");
-	close(fd1);
-	close(fd2);
+    int fd = open("test.txt", O_RDONLY);
+    char *line;
+    
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line);
+        free(line);
+    }
+    close(fd);
+    return 0;
 }
- */
+*/

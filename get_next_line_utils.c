@@ -6,7 +6,7 @@
 /*   By: victode- <victode-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:44:05 by victode-          #+#    #+#             */
-/*   Updated: 2025/11/23 03:39:25 by victode-         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:24:29 by victode-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,29 @@ size_t	ft_strlen(const char *s)
 	if (!s)
 		return (0);
 	i = 0;
-	while (s[i])
+	while (s[i] && s[i] != '\n')
+		i++;
+	if (s[i] == '\n')
 		i++;
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strchr(const char *s, char c)
 {
 	while (*s)
 	{
-		if (*s == (char)c)
-			return ((char *)s);
+		if (*s == c)
+			return (1);
 		s++;
 	}
-	if (*s == (char)c)
-		return ((char *)s);
-	return (NULL);
+	if (*s == c)
+		return (1);
+	return (0);
 }
 
 char	*ft_custom_strjoin(char *s1, char *s2)
 {
-	size_t	i;
+	int		i;
 	size_t	j;
 	char	*join;
 
@@ -66,52 +68,57 @@ char	*ft_custom_strjoin(char *s1, char *s2)
 	return (join);
 }
 
-char	*extract_line(char *stack)
+char	*extract_line(char *buffer)
 {
 	size_t	i;
 	size_t	len;
 	char	*line;
 
-	if (!stack)
+	if (!buffer)
 		return (NULL);
 	i = 0;
 	len = 0;
-	while (stack[len] && stack[len] != '\n')
+	while (buffer[len] && buffer[len] != '\n')
 		len++;
-	if (stack[len] == '\n')
+	if (buffer[len] == '\n')
 		len++;
 	line = malloc(len + 1);
 	if (!line)
-		return (free(stack), NULL);
+		return (NULL);
 	while (i < len)
 	{
-		line[i] = stack[i];
+		line[i] = buffer[i];
 		i++;
 	}
 	line[i] = '\0';
 	return (line);
 }
 
-char	*clean_stack(char *stack)
+char	*clean_buffer(char *buffer)
 {
 	size_t	i;
 	size_t	len;
 	char	*new;
 
-	if (!stack)
+	if (!buffer)
 		return (NULL);
 	i = 0;
 	len = 0;
-	while (stack[len] && stack[len] != '\n')
+	while (buffer[len] && buffer[len] != '\n')
 		len++;
-	if (stack[len] == '\n')
+	if (buffer[len] == '\n')
 		len++;
-	new = malloc(ft_strlen(stack) - len);
+	if (len >= ft_strlen(buffer))
+		return (free(buffer), NULL);
+	new = malloc(ft_strlen(buffer) - len + 1);
 	if (!new)
-		return (free(stack), NULL);
-	while (len < ft_strlen(stack))
-		new[i++] = stack[len++];
+		return (free(buffer), NULL);
+	while (buffer[len + i])
+	{
+		new[i] = buffer[len + i];
+		i++;
+	}
 	new[i] = '\0';
-	free(stack);
+	free(buffer);
 	return (new);
 }
